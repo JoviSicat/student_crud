@@ -30,7 +30,6 @@ services:
 
   # ------------------------------------------------------
   # Vite + React Frontend Application (Static Site)
-  # Note: Static sites are served via global CDN, so no region key
   # ------------------------------------------------------
   - type: web
     name: student-frontend
@@ -51,10 +50,11 @@ services:
 
 # --------------------------------------------------------
 # PostgreSQL Database Service
+# Note: Do not specify 'user: postgres' as Render reserves
+# the superuser and auto-generates a secure database user.
 # --------------------------------------------------------
 databases:
   - name: student-db
     databaseName: db_student
-    user: postgres
     plan: free
     region: oregon
