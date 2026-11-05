@@ -3,7 +3,16 @@
  * Uses Vite proxy configured to forward `/sicat` to http://localhost:8080.
  */
 
-const BASE_URL = '/sicat/students';
+// Base API URL supports:
+// 1. Local development (empty -> uses Vite dev proxy /sicat)
+// 2. Production URL with scheme (e.g. https://student-backend.onrender.com)
+// 3. Raw hostname from Render property:host (e.g. student-backend.onrender.com -> automatically prepends https://)
+let rawApiUrl = (import.meta.env.VITE_API_BASE_URL || '').trim();
+if (rawApiUrl && !rawApiUrl.startsWith('http://') && !rawApiUrl.startsWith('https://')) {
+  rawApiUrl = `https://${rawApiUrl}`;
+}
+const API_BASE_URL = rawApiUrl.replace(/\/$/, '');
+const BASE_URL = `${API_BASE_URL}/sicat/students`;
 
 export const studentService = {
   /**

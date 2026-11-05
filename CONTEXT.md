@@ -125,4 +125,11 @@ STUDENT-CRUD/
 - **Styling**: Tailwind CSS configured with `@tailwindcss/vite`.
 - **UX**: Implemented strictly **without modals**; features a dedicated, sticky side-by-side card form for registration/editing and inline confirmation for student deletion.
 - **API Proxy**: Configured in `vite.config.js` to route `/sicat` -> `http://localhost:8080`.
-- **Build Verification**: `npm run build` executed and verified with 0 errors.
+- **Render.com Deployment**:
+  - Blueprint `render.yaml` created at repository root for 1-click deployment.
+  - Multi-stage `student/Dockerfile` for Java 21 Spring Boot.
+  - `DatabaseConfig.java` auto-parses Render's `DATABASE_URL` for PostgreSQL.
+  - CORS enabled via `WebConfig.java` and `@CrossOrigin(origins = "*")`.
+  - Frontend configured with dynamic `VITE_API_BASE_URL` in `studentService.js`.
+  - Step-by-step instructions available in `RENDER_DEPLOYMENT.md`.
+- **Build Verification**: `npm run build` and `mvnw compile` executed with 0 errors.
