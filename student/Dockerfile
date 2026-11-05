@@ -10,7 +10,7 @@ WORKDIR /app
 # Copy Maven wrapper and pom.xml
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN chmod +x mvnw
+RUN sed -i 's/\r$//' mvnw && chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B
 
 # Copy source code and build jar (skip tests for faster deployment)
